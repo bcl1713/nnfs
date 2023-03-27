@@ -4,6 +4,10 @@ from nnfs.datasets import spiral_data
 
 nnfs.init()
 
+class Activation_ReLU:
+    def forward(self, inputs):
+        self.output = np.maximum(0, inputs)
+
 
 # Dense layer
 class Layer_Dense:
@@ -25,8 +29,12 @@ X, y = spiral_data(samples=100, classes=3)
 # Create Dense layer with 2 input features and 3 output values
 dense1 = Layer_Dense(2, 3)
 
+activation1 = Activation_ReLU()
+
 # Perform a forward pass of our training data through this layer
 dense1.forward(X)
 
+activation1.forward(dense1.output)
+
 # Let's see output of the first few samples
-print(dense1.output[:5])
+print(activation1.output[:5])
